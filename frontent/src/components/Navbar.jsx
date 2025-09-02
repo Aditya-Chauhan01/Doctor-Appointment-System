@@ -39,7 +39,7 @@ const Navbar = () => {
         </ul>
 
         <div className=''>
-            <a href="http://localhost:5174" target='_blank' rel ="noopener noreferrer">
+            <a href="https://doctor-appointment-system-admin-1kvl.onrender.com" target='_blank' rel ="noopener noreferrer">
                 <p className='hidden md:flex border px-3 py-1 rounded-full hover:bg-primary hover:text-white duration-200 cursor-pointer transition-all' style={{listStyleType: "none"}}>Admin/Doctor Panel</p>
             </a>
         </div>
@@ -75,7 +75,7 @@ const Navbar = () => {
                     <NavLink onClick={() => setShowMenu(false)} to='/about'> <p className='px-4 py-2 rounded inline-block'>ABOUT</p> </NavLink>
                     <NavLink onClick={() => setShowMenu(false)} to='/contact'> <p className='px-4 py-2 rounded inline-block'>CONTACT</p> </NavLink>
                     <div>
-                        <a href="http://localhost:5174" target='_blank' rel ="noopener noreferrer">
+                        <a href="https://doctor-appointment-system-admin-1kvl.onrender.com" target='_blank' rel ="noopener noreferrer">
                             <p onClick={() => setShowMenu(false)} className='px-4 py-2 rounded inline-block' style={{listStyleType: "none"}}>Admin/Doctor Panel</p>
                         </a>
                     </div>
