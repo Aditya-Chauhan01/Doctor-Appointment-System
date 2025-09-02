@@ -10,6 +10,7 @@ import MyAppointments from './pages/MyAppointments'
 import Navbar from './components/Navbar'
 import Footer from "./components/Footer"
 import { ToastContainer, toast } from 'react-toastify';
+import Privacy from "./pages/Privacy"
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path='/my-profile' element= { <MyProfile/> } />
         <Route path='/my-appointments' element= { <MyAppointments/> } />
         <Route path='/appointment/:docId' element= { <Appointment/> } />
+        <Route path='/privacy' element= { <Privacy /> } />
       </Routes>
       <Footer />
     </div>

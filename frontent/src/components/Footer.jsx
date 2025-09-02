@@ -9,17 +9,17 @@ const Footer = () => {
         {/* ----- left part ---- */}
         <div>
           <img className="mb-5 w-40" src={assets.logoedit1} alt="" />
-          <p className="w-full md:w-2/3 text-gray-600 leading-6">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam molestiae amet architecto ducimus hic necessitatibus debitis suscipit asperiores quisquam quas.</p>
+          <p className="w-full md:w-2/3 text-gray-600 leading-6">Welcome to MediConnect, your trusted partner in managing your healthcare needs conveniently and efficiently. At MediConnect, we understand the challenges individuals face when it comes to scheduling doctor appointments and managing their health records.</p>
         </div>
 
         {/* ------ middle part ---- */}
         <div>
           <p className="text-xl font-medium mb-5">COMPANY</p>
           <ul className="flex flex-col gap-2 text-gray-600">
-            <li>Home</li>
-            <li>About us</li>
-            <li>Contact us</li>
-            <li>Privacy policy</li>
+            <a href="/">Home</a>
+            <a href="/about">About us</a>
+            <a href="/contact">Contact us</a>
+            <a href="/privacy">Privacy policy</a>
           </ul>
         </div>
 
