@@ -1,10 +1,35 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 
 const TopDoctors = () => {
   const navigate = useNavigate();
   const { doctors } = useContext(AppContext);
+  const [loading, setLoading] = useState(true)
+
+
+  useEffect(() => {
+    if(doctors && doctors.length > 0) setLoading(false);
+  }, [doctors])
+
+  if (loading) {
+    // Loader only for this section
+    return (
+      <section className="py-12">
+        <h2 className="text-2xl font-bold text-center mb-6">Top Doctors to Book</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          {[...Array(10)].map((_, i) => (
+            <div
+              key={i}
+              className="h-64 bg-gray-200 animate-pulse rounded-lg"
+            ></div>
+          ))}
+        </div>
+      </section>
+    );
+  }
+
+
 
   return (
     <div className="flex flex-col items-center gap-4 my-16 text-gray-900 md:mx-10">

@@ -10,6 +10,7 @@ const MyAppointments = () => {
 
   const {backendUrl, token, getDoctorsData} = useContext(AppContext)
 
+  const [loading, setLoading] = useState(true)
   const [appointments, setAppointments] = useState([])
   const navigate = useNavigate()
 
@@ -22,17 +23,23 @@ const MyAppointments = () => {
 
   const getUserAppointments = async () => {
     try {
+
+      setLoading(true)
       
       const {data} = await axios.get(backendUrl + '/api/user/appointments', {headers: {token}})
 
       if(data.success){
         setAppointments(data.appointments.reverse())
-        console.log(data.appointments);
+        // console.log(data.appointments);
       }
       
     } catch (error) {
       console.log(error);
       toast.error(error.message)
+    }
+
+    finally{
+      setLoading(false);
     }
   }
 
@@ -107,11 +114,49 @@ const MyAppointments = () => {
     }
   }
 
+
   useEffect(() => {
     if(token){
       getUserAppointments()
     }
   }, [token])
+
+
+  if (loading) {
+    return (
+      <div className="space-y-4">
+        {Array.from({ length: 5 }).map((_, index) => (
+          <div
+            key={index}
+            className="flex items-start gap-4 border-b pb-4 animate-pulse"
+          >
+            {/* Doctor Image Placeholder */}
+            <div className="w-24 h-24 bg-gray-200 rounded-md"></div>
+
+            {/* Doctor Details */}
+            <div className="flex-1 space-y-2">
+              {/* Name & Specialization */}
+              <div className="h-5 bg-gray-200 rounded w-1/3"></div>
+              <div className="h-4 bg-gray-200 rounded w-1/4"></div>
+
+              {/* Address */}
+              <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+
+              {/* Date & Time */}
+              <div className="h-4 bg-gray-200 rounded w-1/3"></div>
+            </div>
+
+            {/* Status / Button Placeholder */}
+            <div className="flex flex-col items-end gap-2">
+              <div className="h-8 w-32 bg-gray-200 rounded-md"></div>
+              <div className="h-8 w-32 bg-gray-200 rounded-md"></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
 
   return (
     <div>

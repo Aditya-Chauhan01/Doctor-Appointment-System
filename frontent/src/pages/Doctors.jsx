@@ -1,26 +1,99 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/AppContext";
 import { useNavigate, useParams } from "react-router-dom";
+import Catalog from "../components/Catalog"; // adjust the path as per your folder
+
 
 const Doctors = () => {
   const [filterDoc, setFilterDoc] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
   const { speciality } = useParams();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   const { doctors } = useContext(AppContext);
 
   const applyFilter = () => {
-    if (speciality) {
+    if (speciality && doctors.length > 0) {
       setFilterDoc(doctors.filter((doc) => doc.speciality === speciality));
     } else {
       setFilterDoc(doctors);
     }
   };
 
+
+
   useEffect(() => {
-    applyFilter();
+    if(doctors && doctors.length > 0){
+      applyFilter();
+      setLoading(false);
+    }
+    else setLoading(true);
+    // applyFilter();
   }, [doctors, speciality]);
+
+
+
+  if (loading) {
+    return (
+      <div className="p-8 bg-gray-50 min-h-screen">
+        <p className="text-gray-600 mb-5"></p>
+        <div className="flex flex-col sm:flex-row items-start gap-5">
+          {/* Filter Button (Mobile) */}
+          <button className="py-1 px-3 border rounded text-sm transition-all sm:hidden animate-pulse">
+            <div className="h-4 bg-gray-200 rounded w-12"></div>
+          </button>
+          
+          {/* Left Sidebar - Specialist Categories */}
+          <div className="flex-col gap-4 text-sm text-gray-600 flex">
+            {[
+              "Gynecologist",
+              "General physician", 
+              "Dermatologist",
+              "Pediatricians",
+              "Neurologist",
+              "Gastroenterologist"
+            ].map((specialty, index) => (
+              <div
+                key={index}
+                className="w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all animate-pulse"
+              >
+                <div className="h-4 bg-gray-200 rounded w-32"></div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Right Content - Doctor Cards Grid */}
+          <div className="w-full grid gap-4 [grid-template-columns:repeat(auto-fill,minmax(200px,1fr))]">
+            {Array.from({ length: 12 }).map((_, index) => (
+              <div
+                key={index}
+                className="border border-blue-200 rounded-xl overflow-hidden animate-pulse shadow-sm hover:shadow-md transition-shadow duration-200"
+              >
+                {/* Doctor Image Placeholder */}
+                <div className="w-full h-48 bg-gray-200"></div>
+                
+                <div className="p-4">
+                  {/* Availability Status */}
+                  <div className="flex items-center gap-2 text-sm mb-2">
+                    <div className="w-2 h-2 bg-gray-200 rounded-full"></div>
+                    <div className="h-4 bg-gray-200 rounded w-20"></div>
+                  </div>
+                  
+                  {/* Doctor Name */}
+                  <div className="h-6 bg-gray-200 rounded w-full mb-2"></div>
+                  
+                  {/* Specialty */}
+                  <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
 
   return (
     <div>
